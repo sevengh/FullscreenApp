@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FullscreenApp
 {
@@ -20,9 +11,26 @@ namespace FullscreenApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Application folder name
+        /// </summary>
+        static readonly string AppNameFolder = "FullscreenApp";
+
+        /// <summary>
+        /// App images path
+        /// </summary>
+        public readonly static string FolderPathImages = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            AppNameFolder,
+            "Images");
+
         public MainWindow()
         {
             InitializeComponent();
+
+            var filenameImage = Path.Combine(FolderPathImages, @"background.jpg");
+            Brush background = new ImageBrush(new BitmapImage(new Uri(filenameImage)));
+            MainGrid.Background = background;
         }
     }
 }
